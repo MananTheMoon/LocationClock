@@ -91,7 +91,6 @@ void setup()
     strip.begin();
     strip.show(); // Initialize all pixels to 'off'
     initLeds();
-    initLocations(); // Initialize all people to mortal peril
 }
 
 void initLeds(){
