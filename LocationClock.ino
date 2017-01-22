@@ -78,19 +78,29 @@ int UpdateClock(String command){
     strip.setPixelColor(person_config.pen+pln*6,
                         strip.Color(person_config.green, person_config.red, person_config.blue));
     strip.show();
+    Particle.publish("ClockUpdated", command);
     return 1;
 }
 
 void setup()
 {
     Particle.function("UpdateClock", UpdateClock);
-    Particle.function("ExitPeril", leavePeril);
     Serial.begin(9600);
     Serial.print("Setting Up Serial");
 
     strip.begin();
     strip.show(); // Initialize all pixels to 'off'
     initLeds();
+    initLocations(); // Initialize all people to mortal peril
+}
+
+// Set everyone to mortal peril after initializing
+void initLocations() {
+    UpdateClock("entered,Katie,Peril");
+    UpdateClock("entered,Matt,Peril");
+    UpdateClock("entered,Manan,Peril");
+    UpdateClock("entered,Robert,Peril");
+    UpdateClock("entered,Abby,Peril");
 }
 
 void initLeds(){
