@@ -56,6 +56,10 @@ int UpdateClock(String command){
     String input_person = command.substring(comma_index+1, second_comma_index);
     String input_place = command.substring(second_comma_index+1); // To the end of the string
 
+    if(!user_map.count(input_person)) {
+        return 0; // Person doesn't exist in user_map
+    }
+
     PersonConfig person_config = user_map[input_person];
     last_location_map[input_person] = curr_location_map[input_person];
 
