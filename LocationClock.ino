@@ -86,9 +86,24 @@ int UpdateClock(String command){
     return 1;
 }
 
+//sample function input: "Katie"
+int leavePeril(String name){
+    if(curr_location_map[name] != "Peril") {
+        return 1;
+    }
+    String last_location = "Home"; // Default value if there is no last location for a person
+    if(last_location_map.count(name) && curr_location_map[name] == "Peril"){
+        String last_location = last_location_map[name];
+    }
+    String command = "entered," + name + "," + last_location;
+    UpdateClock(command);
+    return 1;
+}
+
 void setup()
 {
     Particle.function("UpdateClock", UpdateClock);
+    Particle.function("ExitPeril", leavePeril);
     Serial.begin(9600);
     Serial.print("Setting Up Serial");
 
